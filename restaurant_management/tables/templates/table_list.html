@@ -1,0 +1,11 @@
+<!-- tables/templates/tables/table_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Table List</h2>
+  <ul>
+    {% for table in tables %}
+      <li>{{ table }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

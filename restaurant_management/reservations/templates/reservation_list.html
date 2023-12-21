@@ -1,0 +1,11 @@
+<!-- reservations/templates/reservations/reservation_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Reservation List</h2>
+  <ul>
+    {% for reservation in reservations %}
+      <li>{{ reservation }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

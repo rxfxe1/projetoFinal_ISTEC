@@ -1,0 +1,34 @@
+.menu-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+  
+.menu-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.menu-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f8f8f8;
+  box-shadow: 0px 2px 5px rgba( 0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.menu-item:hover {
+  transform: scale(1.05);
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-price {
+  color: #009688; /* teal color */
+  font-weight: bold;
+}
+  
