@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from rest_framework import generics
 from .models import Reservation
 from .forms import ReservationForm
+from .serializers import ReservationSerializer
 
 def reservation_list(request):
     reservations = Reservation.objects.all()
@@ -21,3 +23,8 @@ def reserve_table(request):
         form = ReservationForm()
 
     return render(request, 'reservation/reserve_table.html', {'form': form})
+
+
+class ReservationListCreateView(generics.ListCreateAPIView):
+    queryset = Reservation.objects.all()
+    serializer_class = ReservationSerializer
