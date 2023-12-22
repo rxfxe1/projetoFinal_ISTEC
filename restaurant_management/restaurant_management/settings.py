@@ -16,11 +16,12 @@ INSTALLED_APPS =    [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'reservations', 
-    'tables',
     'orders',
+    'reservations',
+    'tables',
     'users',
     'webpack_loader',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

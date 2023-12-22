@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import include, path
-from .views import index
+from .views import index, reserve_table
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -9,4 +9,5 @@ urlpatterns = [
     path('reservations/', include('reservations.urls')),
     path('tables/', include('tables.urls')),
     path('users/', include('users.urls')),
+    path('reserve/', reserve_table, name='reserve_table'),
 ]
