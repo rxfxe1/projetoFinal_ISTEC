@@ -2,15 +2,6 @@ import React from 'react';
 import './Menu.css';
 
 const Menu = () => {
-
-    useEffect(() => {
-        console.log('Menu component rendered');
-        return () => {
-            console.log('Menu component unmounted');
-        };
-    }, []);
-
-
     return (
         <div className="menu-container">
             <h2>Menu</h2>
