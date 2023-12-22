@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const ReservationForm = () => {
     const [name, setName] = useState('');
@@ -7,11 +8,21 @@ const ReservationForm = () => {
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission (connect to the server)
-        console.log('Reservation submitted:', { name, phone, table, date, time });
-    };
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/reservations/', {
+                name, 
+                phone,
+                table, 
+                date, 
+                time,
+            });
+            console.log('Reservation submitted successfully:', response.data);
+        } catch (error) {
+            console.error('Error submitting reservation:', error);
+        }
+    }
 
     return (
         <div className="reservation-form">
