@@ -120,3 +120,5 @@ WEBPACK_LOADER = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
+
+AUTH_USER_MODEL = 'users.UserProfile'

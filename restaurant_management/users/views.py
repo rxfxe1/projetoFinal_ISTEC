@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from .models import UserProfile
 
-def profile_detail(request, username):
-    profile = UserProfile.objects.get(user__username=username)
-    return render(request, 'users/profile_detail.html', {'profile': profile})
+@login_required
+def profile_detail(request):
+    user = request.user
+    return render(request, 'users/profile_detail.html', {'user': user})
