@@ -1,19 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const ReservationForm = () => {
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
+    const [numPeople, setNumPeople] = useState('');
     const [table, setTable] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
 
+    const [tables, setTables] = useState([]);
+
+    useEffect(() => {
+        // Fetch tables from Django API
+        const fetchTables = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/tables/');
+                setTables(response.data);
+            } catch (error) {
+                console.error('Error fetching tables:', error);
+            }
+        };
+
+        fetchTables();
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/reservations/', {
                 name, 
                 phone,
+                num_people: numPeople,
                 table, 
                 date, 
                 time,
@@ -33,16 +52,27 @@ const ReservationForm = () => {
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </label>
                 <label>
-                    Phone Number:
+                    Phone number:
                     <input type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
                 </label>
                 <label>
-                    Table Number:
-                    <select value={table} onChange={(e) => setTable(e.target.value)}>
+                    Number of people:
+                    <input
+                        type="number"
+                        value={numPeople}
+                        onChange={(e) => setNumPeople(Math.max(1, e.target.value))}
+                        min="1"
+                    />
+                </label>
+                <label>
+                    Table:
+                    <select value={table} onChange={(e) => setTable(e.target.value)} >
                         <option value="">Select Table</option>
-                        <option value="1">Table 1</option>
-                        <option value="2">Table 2</option>
-                        {/* Add more options as needed */}
+                        {tables.map((table) => (
+                            <option key={table.id} value={table.id}>
+                                {`Table ${table.number} - Capacity:P ${table.capacity}`}
+                            </option>
+                        ))}
                     </select>
                 </label>
                 <label>
@@ -53,7 +83,7 @@ const ReservationForm = () => {
                     Time:
                     <input type="time" value={time} onChange={(e) => setTime(e.target.value)} />
                 </label>
-                
+
                 <button type="submit">Reserve Now</button>
             </form>
         </div>
