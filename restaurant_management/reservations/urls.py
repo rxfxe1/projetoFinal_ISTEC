@@ -4,5 +4,5 @@ from .views import ReservationListCreateView, ReservationViewSet, registration_v
 urlpatterns = [
     path('list/', ReservationListCreateView.as_view(), name='reservation-list-create'),
     path('detail/<int:pk>/', ReservationViewSet.as_view({'get': 'retrieve'}), name='reservation-detail'),
-    path('api/register/', registration_view, name='api-register'),
+    path('register/', registration_view, name='register'),
 ]

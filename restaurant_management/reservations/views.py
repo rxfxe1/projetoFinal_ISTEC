@@ -22,7 +22,7 @@ def reserve_table(request):
             reservation.user = request.user
             reservation.save()
             messages.success(request, 'Reservation submitted successfully.')
-            return redirect('reservation_list')  # Fix the typo here
+            return redirect('reservation_list')
     else:
         form = ReservationForm()
 
@@ -42,7 +42,7 @@ class ReservationViewSet(viewsets.ModelViewSet):
 @permission_classes([AllowAny])
 def registration_view(request):
     first_name = request.data.get('first_name')
-    last_name = request.data.get('lsat_name')
+    last_name = request.data.get('last_name')
     email = request.data.get('email')
     phone = request.data.get('phone')
     username = request.data['username']
@@ -53,7 +53,7 @@ def registration_view(request):
     
     user, created = User.objects.get_or_create(
         username=username,
-        defaults={'first_name': first_name, 'lasr_name': last_name, 'email': email}
+        defaults={'first_name': first_name, 'last_name': last_name, 'email': email}
     )
     if created:
         user.set_password(password)
@@ -61,3 +61,4 @@ def registration_view(request):
         return Response({'success': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
     else:
         return Response({'error':'Username already exists.'},status=status.HTTP_400_BAD_REQUEST)
+    
