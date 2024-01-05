@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView
 from rest_framework.routers import DefaultRouter
 from .views import index, reserve_table
-from reservations.views import ReservationViewSet, registration_view
+from reservations.views import ReservationViewSet
 
 router = DefaultRouter()
 router.register(r'reservations', ReservationViewSet, basename='reservation')
@@ -17,5 +17,5 @@ urlpatterns = [
     path('reserve/', reserve_table, name='reserve_table'),
     path('api/', include(router.urls)),
     path('login/', LoginView.as_view(), name='login'),
-    path('register/', registration_view, name='register'),
+    path('auth/', include('authentication.urls')),
 ]

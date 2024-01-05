@@ -19,6 +19,7 @@ INSTALLED_APPS =    [
     'orders',
     'reservations',
     'tables',
+    'authentication',
     'webpack_loader',
     'rest_framework',
     'corsheaders',
